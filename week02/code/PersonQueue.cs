@@ -1,35 +1,36 @@
-/// <summary>
-/// A basic implementation of a Queue
-/// </summary>
+using System;
+using System.Collections.Generic;
+
+// This class wraps a queue of Person objects using FIFO logic
 public class PersonQueue
 {
-    private readonly List<Person> _queue = new();
+    // Internal queue to store Person objects
+    private Queue<Person> _queue = new();
 
-    public int Length => _queue.Count;
-
-    /// <summary>
-    /// Add a person to the queue
-    /// </summary>
-    /// <param name="person">The person to add</param>
+    // Add a person to the end of the queue
     public void Enqueue(Person person)
     {
-        _queue.Insert(0, person);
+        _queue.Enqueue(person);
     }
 
+    // Remove and return the person at the front of the queue
     public Person Dequeue()
     {
-        var person = _queue[0];
-        _queue.RemoveAt(0);
-        return person;
+        return _queue.Dequeue();
     }
 
+    // Check if the queue is empty
     public bool IsEmpty()
     {
-        return Length == 0;
+        return _queue.Count == 0;
     }
 
+    // Return the number of people in the queue
+    public int Length => _queue.Count;
+
+    // Convert the queue to a readable string
     public override string ToString()
     {
-        return $"[{string.Join(", ", _queue)}]";
+        return string.Join(", ", _queue);
     }
 }
